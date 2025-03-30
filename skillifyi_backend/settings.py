@@ -87,7 +87,7 @@ WSGI_APPLICATION = 'skillifyi_backend.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(
-        default='sqlite:///db.sqlite3',
+        default='postgresql://postgres:postgres@localhost:5432/skillifyi_db',
         conn_max_age=600
     )
 }
