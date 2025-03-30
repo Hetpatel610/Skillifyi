@@ -21,8 +21,8 @@ services:
       - key: CSRF_TRUSTED_ORIGINS
         value: https://*.onrender.com
       - key: SECURE_SSL_REDIRECT
-        value: True
+        value: False
       - key: SESSION_COOKIE_SECURE
-        value: True
+        value: False
       - key: CSRF_COOKIE_SECURE
-        value: True 
+        value: False 
