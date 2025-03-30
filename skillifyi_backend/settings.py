@@ -131,13 +131,14 @@ USE_TZ = True
 # Media settings for file uploads
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
-
-# Directory where static files will be collected (when using collectstatic)
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
 
-# Additional directories where Django will search for static files (optional)
-import os
+# Whitenoise configuration
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+
 # Media files (Uploaded files like images, docs, etc.)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')# Folder where media files will be stored
