@@ -87,7 +87,7 @@ WSGI_APPLICATION = 'skillifyi_backend.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(
-        default='mysql://root:Het@6107@localhost:3306/skillifyi_db',
+        default='sqlite:///db.sqlite3',
         conn_max_age=600
     )
 }
