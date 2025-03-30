@@ -31,7 +31,7 @@ SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'django-insecure-dl8^adh%=$j*c3r@0qr
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = ['*']  # Update this with your Railway domain in production
+ALLOWED_HOSTS = ['*', '.railway.app']  # Update this with your Railway domain in production
 
 
 # Application definition
@@ -88,7 +88,9 @@ WSGI_APPLICATION = 'skillifyi_backend.wsgi.application'
 DATABASES = {
     'default': dj_database_url.config(
         default='postgresql://postgres:postgres@localhost:5432/skillifyi_db',
-        conn_max_age=600
+        conn_max_age=600,
+        conn_health_checks=True,
+        ssl_require=True
     )
 }
 
