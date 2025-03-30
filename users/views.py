@@ -38,6 +38,9 @@ def signup(request):
             user = User.objects.create_user(username=username, email=email, password=password)
             user.save()
 
+            # Create a profile for the user
+            Profile.objects.create(user=user)
+
             # Log the user in after successful signup
             login(request, user)
 
@@ -47,6 +50,9 @@ def signup(request):
         except IntegrityError as e:
             if 'auth_user.username' in str(e):
                 error_message = "Username already exists. Please choose a different username."
+                return render(request, 'users/signup.html', {'error_message': error_message})
+            else:
+                error_message = "An error occurred during signup. Please try again."
                 return render(request, 'users/signup.html', {'error_message': error_message})
 
     return render(request, 'users/signup.html')
@@ -141,12 +147,19 @@ def login_view(request):
         username = request.POST.get('username')
         password = request.POST.get('password')
 
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            return redirect('home_page')  # Redirect to the home page or dashboard
-        else:
-            return render(request, 'users/login.html', {'error_message': 'Invalid username or password'})
+        try:
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                # Check if user has a profile, if not create one
+                if not hasattr(user, 'profile'):
+                    Profile.objects.create(user=user)
+                
+                login(request, user)
+                return redirect('home_page')  # Redirect to the home page or dashboard
+            else:
+                return render(request, 'users/login.html', {'error_message': 'Invalid username or password'})
+        except Exception as e:
+            return render(request, 'users/login.html', {'error_message': 'An error occurred during login. Please try again.'})
     
     return render(request, 'users/login.html')
 
