@@ -19,6 +19,7 @@ from django.urls import path, include
 from django.shortcuts import render
 from django.conf import settings
 from django.conf.urls.static import static
+from users import views
 
 # Define a simple home page view
 def home_view(request):
@@ -26,14 +27,10 @@ def home_view(request):
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', home_view),  # Root URL (homepage) route
+    path('', views.home_page, name='home_page'),  # Root URL (homepage) route
     path('users/', include('users.urls')),  # Include the users app's URLs
 ]
 
-# Serve static and media files
-if settings.DEBUG:
-    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-else:
-    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# Always serve static files
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

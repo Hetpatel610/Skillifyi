@@ -156,5 +156,10 @@ if not DEBUG:
     SECURE_BROWSER_XSS_FILTER = True
     SECURE_CONTENT_TYPE_NOSNIFF = True
     X_FRAME_OPTIONS = 'DENY'
-    # Add this for static files in production
-    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+    CSRF_TRUSTED_ORIGINS = ['https://*.onrender.com']
+    ALLOWED_HOSTS = ['.onrender.com', 'skillifyi.onrender.com']
+else:
+    SECURE_SSL_REDIRECT = False
+    SESSION_COOKIE_SECURE = False
+    CSRF_COOKIE_SECURE = False
+    ALLOWED_HOSTS = ['*']
