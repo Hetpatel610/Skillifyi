@@ -1,0 +1,1 @@
+web: gunicorn skillifyi_backend.wsgi --log-file - 
