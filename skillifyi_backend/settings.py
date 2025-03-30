@@ -86,7 +86,7 @@ WSGI_APPLICATION = 'skillifyi_backend.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(
-        default='postgresql://postgres:postgres@localhost:5432/skillifyi_db',
+        default='postgresql://root:O0PjVon7y55LffXO8AWCweIPp8c9jSZp@dpg-cvkj63d6ubrc73fpknu0-a.oregon-postgres.render.com/skillifyidb',
         conn_max_age=600,
         conn_health_checks=True
     )
@@ -156,3 +156,5 @@ if not DEBUG:
     SECURE_BROWSER_XSS_FILTER = True
     SECURE_CONTENT_TYPE_NOSNIFF = True
     X_FRAME_OPTIONS = 'DENY'
+    # Add this for static files in production
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
