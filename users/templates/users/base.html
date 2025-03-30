@@ -4,13 +4,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>{% block title %}Skillifyi{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'users/css/home.css' %}">
-    <link rel="icon" type="image/x-icon" href="{% static 'users/images/logo-favicon.ico' %}">
+    <!-- Base CSS -->
+    <link type="text/css" rel="stylesheet" href="{% static 'users/css/home.css' %}">
+    <!-- Favicon -->
+    <link type="image/x-icon" rel="icon" href="{% static 'users/images/logo-favicon.ico' %}">
+    <!-- Extra CSS -->
     {% block extra_css %}{% endblock %}
 </head>
 <body>
     {% block content %}{% endblock %}
+    
+    <!-- Base JavaScript -->
+    <script type="text/javascript" src="{% static 'users/js/main.js' %}"></script>
+    <!-- Extra JavaScript -->
     {% block extra_js %}{% endblock %}
 </body>
 </html> 

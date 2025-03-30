@@ -130,18 +130,26 @@ USE_TZ = True
 
 # Media settings for file uploads
 # Static files (CSS, JavaScript, Images)
-STATIC_URL = '/static/'
+STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
 # Whitenoise configuration
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Media files (Uploaded files like images, docs, etc.)
-MEDIA_URL = '/media/'
+MEDIA_URL = 'media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')# Folder where media files will be stored
+
+# Add MIME type configuration
+WHITENOISE_MIMETYPES = {
+    '.css': 'text/css',
+    '.js': 'application/javascript',
+    '.html': 'text/html',
+    '.ico': 'image/x-icon',
+}
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
@@ -150,14 +158,14 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Security settings
 if not DEBUG:
-    SECURE_SSL_REDIRECT = False  # Set to False temporarily for testing
-    SESSION_COOKIE_SECURE = False  # Set to False temporarily for testing
-    CSRF_COOKIE_SECURE = False  # Set to False temporarily for testing
+    SECURE_SSL_REDIRECT = False
+    SESSION_COOKIE_SECURE = False
+    CSRF_COOKIE_SECURE = False
     SECURE_BROWSER_XSS_FILTER = True
-    SECURE_CONTENT_TYPE_NOSNIFF = True
+    SECURE_CONTENT_TYPE_NOSNIFF = False  # Set to False to allow proper MIME type handling
     X_FRAME_OPTIONS = 'DENY'
-    CSRF_TRUSTED_ORIGINS = ['https://*.onrender.com']
-    ALLOWED_HOSTS = ['.onrender.com', 'skillifyi.onrender.com']
+    CSRF_TRUSTED_ORIGINS = ['https://*.onrender.com', 'https://skillifyi.onrender.com']
+    ALLOWED_HOSTS = ['*', '.onrender.com', 'skillifyi.onrender.com']
 else:
     SECURE_SSL_REDIRECT = False
     SESSION_COOKIE_SECURE = False

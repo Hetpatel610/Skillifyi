@@ -17,12 +17,14 @@ services:
       - key: DATABASE_URL
         value: postgresql://root:O0PjVon7y55LffXO8AWCweIPp8c9jSZp@dpg-cvkj63d6ubrc73fpknu0-a.oregon-postgres.render.com/skillifyidb
       - key: ALLOWED_HOSTS
-        value: .onrender.com,skillifyi.onrender.com
+        value: "*,.onrender.com,skillifyi.onrender.com"
       - key: CSRF_TRUSTED_ORIGINS
-        value: https://*.onrender.com
+        value: https://*.onrender.com,https://skillifyi.onrender.com
       - key: SECURE_SSL_REDIRECT
         value: False
       - key: SESSION_COOKIE_SECURE
         value: False
       - key: CSRF_COOKIE_SECURE
+        value: False
+      - key: SECURE_CONTENT_TYPE_NOSNIFF
         value: False 
