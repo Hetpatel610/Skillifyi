@@ -31,7 +31,7 @@ SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'django-insecure-dl8^adh%=$j*c3r@0qr
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = ['*', '.railway.app']  # Update this with your Railway domain in production
+ALLOWED_HOSTS = ['*', '.onrender.com', 'skillifyi.onrender.com']
 
 
 # Application definition
@@ -88,8 +88,7 @@ DATABASES = {
     'default': dj_database_url.config(
         default='postgresql://postgres:postgres@localhost:5432/skillifyi_db',
         conn_max_age=600,
-        conn_health_checks=True,
-        ssl_require=True
+        conn_health_checks=True
     )
 }
 
@@ -148,3 +147,11 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')# Folder where media files will be s
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Security settings
+SECURE_SSL_REDIRECT = False  # Set to True in production
+SESSION_COOKIE_SECURE = False  # Set to True in production
+CSRF_COOKIE_SECURE = False  # Set to True in production
+SECURE_BROWSER_XSS_FILTER = True
+SECURE_CONTENT_TYPE_NOSNIFF = True
+X_FRAME_OPTIONS = 'DENY'
